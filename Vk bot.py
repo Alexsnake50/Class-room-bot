@@ -29,14 +29,13 @@ while True:
             print('Текст:', event.obj.text)
             print()
             if event.from_user:
-<<<<<<< Updated upstream
+
                 if event.obj.text == "понедельник" or event.obj.text == "Понедельник":
                     session_api.messages.send(
                         user_id=event.obj.from_id,
                         random_id = 0,
                         message='----' '<br>' 'Безопасность жизнедеятельности: каб.212' '<br>' 'Иностранный язык: каб.207' '<br>' 'Теория вероятности и математическая статистика: каб.214' '<br>' '----'
                 )
-=======
                 if event.obj.text == "Понедельник" or event.obj.text == "понедельник":
                     session_api.messages.send(
                         user_id=event.obj.from_id,
