@@ -6,9 +6,7 @@ import random
 import time
 vk_session = vk_api.VkApi(token='83b4c5cd93ff81cab83c0b4d85985aa648df73bf96d43f0eb1ec602a6bd738b8df5484893b658db0aebd0')
 session_api = vk_session.get_api()
-<<<<<<< Updated upstream
 longpoll = VkBotLongPoll(vk_session, 183006227)
-=======
 longpoll = VkBotLongPoll(vk_session, 183006227) 
 week = 0 
 dt = datetime.now()
@@ -16,7 +14,6 @@ if dt.isocalendar()[1] % 2 == 0:
     week = 1
 else:
     week =  2
->>>>>>> Stashed changes
 while True:
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
@@ -86,5 +83,3 @@ while True:
                             random_id = 0,
                             message='----' '<br>' '----' '<br>' 'Физическая культура С/З' '<br>' 'Основы Философии: каб.302' '<br>' 'Русский язык и культура речи: каб 215',
                         )
-                   
->>>>>>> Stashed changes
