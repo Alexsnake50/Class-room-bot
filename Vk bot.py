@@ -1,15 +1,16 @@
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from datetime import datetime
-from datetime import date
+from datetime import datetime, date
 import random
 import time
+from Meta_Data import mt, Name, Metadata
 vk_session = vk_api.VkApi(token='83b4c5cd93ff81cab83c0b4d85985aa648df73bf96d43f0eb1ec602a6bd738b8df5484893b658db0aebd0')
 session_api = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, 183006227)
 longpoll = VkBotLongPoll(vk_session, 183006227) 
 week = 0 
 dt = datetime.now()
+array = ["Как же не хочется на пары","Скоро сессия, а может и нет","Скоро отчисление","Прятного дня, но это не та команда","Опять бух учёт !","Нет завтра не выходной", "Прошу прощения, вы ошиблись","Извините, но такой команды нету", "Пидрила ебанный", "уёбак сранный","Хуесас дебил", "Нету такой команды","СКАЗАЛИ ЖЕ НЕТУ ТАКОЙ КОМАНДЫ","Ты дебил ?","НЕТ ТАКОЙ КОМАНДЫ !", "Уди отсюда","Ты это, это, НЕ ИСПЫТЫВАЙ МЕНЯ"]
 if dt.isocalendar()[1] % 2 == 0:
     week = 1
 else:
@@ -26,60 +27,24 @@ while True:
             print('Текст:', event.obj.text)
             print()
             if event.from_user:
-
-                if event.obj.text == "понедельник" or event.obj.text == "Понедельник":
+                for x in Name:
+                    if x == event.obj.text:
+                        DataName = Name.index(x)
+                        if DataName == 2 or DataName == 3 or DataName == 8 or DataName == 9 and week == 2:
+                            session_api.messages.send(
+                                user_id=event.obj.from_id,
+                                random_id = 0,
+                                message= Metadata[DataName+1]
+                            )
+                        else :
+                            session_api.messages.send(
+                                user_id=event.obj.from_id,
+                                random_id = 0,
+                                message= Metadata[DataName]
+                            )
+                if Name.count(event.obj.text)  == 0:
                     session_api.messages.send(
                         user_id=event.obj.from_id,
                         random_id = 0,
-                        message='----' '<br>' 'Безопасность жизнедеятельности: каб.212' '<br>' 'Иностранный язык: каб.207' '<br>' 'Теория вероятности и математическая статистика: каб.214' '<br>' '----'
-                )
-                if event.obj.text == "Понедельник" or event.obj.text == "понедельник":
-                    session_api.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id = 0,
-                        message= '----' '<br>' 'Безопасность жизнедеятельности: каб.212' '<br>' 'Иностранный язык: каб.207' '<br>' 'Теория вероятности и математическая статистика: каб.214' '<br>' '----'
+                        message= array[random.randrange (0,17,1)],
                     )
-
-                if event.obj.text == "Вторник" or event.obj.text == "вторник":
-                    if week == 1:
-                        session_api.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id = 0,
-                        message= 'Основы бухгалтерского учёта: каб.216' '<br>' 'Основы теории информации: каб.213' '<br>' 'Математика: каб.214' '<br>' 'Менеджмент: каб.301' '<br>' 'Основы бухгалтерского учёта: каб.216' ,
-                        )
-                    elif week == 2:
-                        session_api.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id = 0,
-                        message= 'История: каб.302' '<br>' 'Основы теории информации: каб.213' '<br>' 'Математика: каб.214' '<br>' 'Менеджмент: каб.301' '<br>' 'Основы бухгалтерского учёта: каб.216' ,
-                        )
-                            
-
-                if event.obj.text == "Среда" or event.obj.text == "среда":
-                    session_api.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id = 0,
-                        message='Обработка отраслевой информации: каб.210' '<br>' 'Основы теории информации: каб.213' '<br>' 'Менеджмент: каб.301' '<br>' 'Методы обработки отраслевой информации: каб.210' '<br>' '----'
-                    )
-
-                if event.obj.text == "Четверг" or event.obj.text == "четверг":
-                    session_api.messages.send(
-                        user_id=event.obj.from_id,
-                        random_id = 0,
-                        message='математика: каб.214' '<br>' 'Основы бухгалтерского учёта: каб.216' '<br>' 'Основы философии: каб.302' '<br>' 'Русский язык и культура речи: каб.215' '<br>' '----',
-                    )
-
-                if event.obj.text == "Пятница" or event.obj.text == "пятница":
-                    if week == 1:
-                        session_api.messages.send(
-                            user_id=event.obj.from_id,
-                            random_id = 0,
-                            message='----' '<br>' '----' '<br>' 'Физическая культура С/З' '<br>' 'История: каб.302' '<br>' 'Русский язык и культура речи: каб 215',
-                        )
-
-                    elif week == 2:
-                        session_api.messages.send(
-                            user_id=event.obj.from_id,
-                            random_id = 0,
-                            message='----' '<br>' '----' '<br>' 'Физическая культура С/З' '<br>' 'Основы Философии: каб.302' '<br>' 'Русский язык и культура речи: каб 215',
-                        )
