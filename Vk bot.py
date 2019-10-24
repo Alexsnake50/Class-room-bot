@@ -1,12 +1,18 @@
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-from datetime import datetime
+from datetime import datetime, date
 import random
 import time
 from Meta_Data import Name, mt, Metadata 
 vk_session = vk_api.VkApi(token='83b4c5cd93ff81cab83c0b4d85985aa648df73bf96d43f0eb1ec602a6bd738b8df5484893b658db0aebd0')
 session_api = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, 183006227) 
+week = 0
+dt = datetime.now()
+if dt.isocalendar()[1] % 2 == 0 :
+    week = 1
+else :
+    week = 2
 while True:
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
